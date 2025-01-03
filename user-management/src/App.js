@@ -40,6 +40,15 @@ const App = () => {
   };
 
   const handleSave = () => {
+    if (!selectedUser.name || !selectedUser.username || !selectedUser.email) {
+      alert("All fields are required.");
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(selectedUser.email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
     setUsers((prevUsers) =>
       prevUsers.map((user) =>
         user.id === selectedUser.id ? selectedUser : user
@@ -51,8 +60,15 @@ const App = () => {
       )
     );
     setShowModal(false);
+    setSelectedUser(null);
     alert("User details have been submitted successfully");
   };
+  
+  const handleClose = () => {
+    setSelectedUser(null);
+    setShowModal(false);
+  };
+  
 
   return (
     <div className="container mt-4">
@@ -101,56 +117,56 @@ const App = () => {
 
       {/* Edit User Modal */}
       {selectedUser && (
-        <Modal show={showModal} onHide={() => setShowModal(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Edit User</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form>
-              <Form.Group className="mb-3">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={selectedUser.name}
-                  onChange={(e) =>
-                    setSelectedUser({ ...selectedUser, name: e.target.value })
-                  }
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Username</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={selectedUser.username}
-                  onChange={(e) =>
-                    setSelectedUser({ ...selectedUser, username: e.target.value })
-                  }
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  value={selectedUser.email}
-                  onChange={(e) =>
-                    setSelectedUser({ ...selectedUser, email: e.target.value })
-                  }
-                  required
-                />
-              </Form.Group>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShowModal(false)}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleSave}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal>
+        <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit User</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                value={selectedUser.name}
+                onChange={(e) =>
+                  setSelectedUser({ ...selectedUser, name: e.target.value })
+                }
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="text"
+                value={selectedUser.username}
+                onChange={(e) =>
+                  setSelectedUser({ ...selectedUser, username: e.target.value })
+                }
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                value={selectedUser.email}
+                onChange={(e) =>
+                  setSelectedUser({ ...selectedUser, email: e.target.value })
+                }
+                required
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleSave}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
       )}
     </div>
   );
