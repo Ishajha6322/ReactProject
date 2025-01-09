@@ -23,7 +23,7 @@ const ProductList = () => {
 
   return (
     <div className="container my-5">
-      <h1 className="text-center mb-4">Product List</h1>
+      <h1 className="text-center mb-4">E-Commerce Application</h1>
       <div className="row g-4">
         {items.map((product) => (
           <div key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
