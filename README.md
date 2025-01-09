@@ -62,6 +62,4 @@ Ensure the following dependencies are installed for all projects:
 React: For building user interfaces.
 Axios/Fetch API: For fetching data.
 React Router DOM: For routing between pages.
-Bootstrap/Tailwind CSS: For styling.
-React Hook Form/Yup (Project 2): For form validation.
-Redux Toolkit (Project 3): For state management.
+
