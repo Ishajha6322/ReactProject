@@ -21,26 +21,28 @@ const RegistrationDetailsPage = () => {
   }
 
   return (
-    <div className="container my-4">
-      <h2 className="text-center mb-4">Registration Details</h2>
-      <div className="card">
-        <div className="card-body">
-          <ul className="list-group">
-            {Object.entries(formData).map(([key, value]) => (
-              <li key={key} className="list-group-item d-flex justify-content-between">
-                <strong>{key.replace(/([A-Z])/g, " $1")}</strong>
-                <span>{value}</span>
-              </li>
-            ))}
-          </ul>
+    <div style={{ backgroundColor: "skyblue", padding: "20px", minHeight: "100vh" }}>
+      <div className="container my-4">
+        <h2 className="text-center mb-4">Registration Details</h2>
+        <div className="card">
+          <div className="card-body">
+            <ul className="list-group">
+              {Object.entries(formData).map(([key, value]) => (
+                <li key={key} className="list-group-item d-flex justify-content-between">
+                  <strong>{key.replace(/([A-Z])/g, " $1")}</strong>
+                  <span>{value}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
+        <button
+          className="btn btn-primary w-100 mt-4"
+          onClick={() => navigate("/")}
+        >
+          Back to Home
+        </button>
       </div>
-      <button
-        className="btn btn-primary w-100 mt-4"
-        onClick={() => navigate("/")}
-      >
-        Back to Home
-      </button>
     </div>
   );
 };
